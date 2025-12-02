@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ user_profile.username }}'s Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: #fafafa;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  height: 71px;
+  padding-left: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo i {
+  font-size: 36px;
+  background: linear-gradient(135deg, #ff3d7f, #6a5af9);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: pop 0.4s ease-in-out;
+}
+
+.logo h2 {
+  font-size: 30px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #000, #555);
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+}
+
+.logo:hover i {
+  transform: rotate(12deg) scale(1.15);
+  transition: 0.3s;
+}
+
+.logo:hover h2 {
+  letter-spacing: 2px;
+  transition: 0.3s;
+}
+
+@media (max-width: 600px) {
+  .logo i { font-size: 28px; }
+  .logo h2 { font-size: 24px; }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.7); }
+  100% { transform: scale(1); }
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e3e3e3;
+}
+
+.avatar:hover {
+  transform: scale(1.08);
+}
+/* PROFILE AREA */
+.profile-container {
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.profile-top {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profile-pic img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ddd;
+  transition: 0.3s;
+}
+
+.profile-pic img:hover {
+  transform: scale(1.04);
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.profile-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.profile-buttons button {
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #efefef;
+  font-size: 15px;
+}
+
+.profile-buttons .edit-btn {
+  background: #0095f6;
+  color: white;
+}
+
+.profile-buttons button:hover {
+  opacity: 0.85;
+}
+
+/* FOLLOW COUNTS */
+.follow-counts {
+  display: flex;
+  margin: 12px 0;
+  gap: 25px;
+  font-size: 16px;
+}
+
+.follow-counts span strong {
+  font-size: 18px;
+  margin-right: 3px;
+}
+
+/* BIO */
+.user-bio {
+  color: #333;
+  margin-top: 5px;
+  font-size: 15px;
+}
+
+/* POST GALLERY */
+.post-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 5px;
+  margin-top: 25px;
+}
+
+.post-gallery img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  transition: 0.2s ease-in-out;
+}
+
+.post-gallery img:hover {
+  transform: scale(1.03);
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: #fff;
+  width: 90%;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.popup-content input,
+.popup-content textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.popup-content button {
+  background: #0095f6;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.popup-content button:hover {
+  background: #0075d1;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+  .profile-top {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .follow-counts {
+    justify-content: center;
+  }
+
+  .profile-buttons {
+    justify-content: center;
+  }
+
+  .post-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .post-gallery img {
+    height: 140px;
+  }
+}
+
+</style>
+
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+  <i class="fa-brands fa-dropbox"></i>
+  <h2 >ɪɴꜱᴛᴀᴘᴜʟꜱᴇ</h2>
+</div>
+
+
+    <div class="header-right">
+      {% if user.is_authenticated %}
+        <div class="user-info">
+          <a href="{% url 'profile' %}">
+            <img src="{{ user.profile.profile_pic.url }}" alt="Profile" class="avatar">
+          </a>
+        </div>
+      {% endif %}
+
+    
+    </div>
+  </header>
+  <div class="profile-container">
+
+  <div class="profile-top">
+    
+    <div class="profile-pic">
+      {% if user_profile.profile.profile_pic %}
+        <img src="{{ user_profile.profile.profile_pic.url }}">
+      {% else %}
+        <img src="{% static 'images/default-profile.png' %}">
+      {% endif %}
+    </div>
+
+    <div class="profile-info">
+      <h2>{{ user_profile.username }}</h2>
+
+      <div class="profile-buttons">
+        <button class="edit-btn" onclick="openPopup()">Edit Profile</button>
+      </div>
+
+      <div class="follow-counts">
+        <span><strong>{{ posts|length }}</strong> Posts</span>
+        <span><strong>{{ followers_count }}</strong> Followers</span>
+        <span><strong>{{ following_count }}</strong> Following</span>
+      </div>
+
+      <div class="user-bio">
+        {{ user_profile.profile.bio|default:"No bio yet" }}
+      </div>
+    </div>
+  </div>
+
+  <div class="post-gallery">
+    {% for post in posts %}
+      {% if post.image %}
+        <img src="{{ post.image.url }}">
+      {% endif %}
+    {% empty %}
+      <p>No posts yet!</p>
+    {% endfor %}
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login</title>
+    <style>
+    :root{
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --accent: #4f46e5;
+  --muted: #64748b;
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(31,41,55,0.08);
+  --gap: 14px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Layout */
+.container{
+  width:100%;
+  max-width:420px;
+}
+
+/* Card */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:28px;
+}
+
+/* Title */
+.title{
+  margin:0 0 18px 0;
+  font-size:20px;
+  letter-spacing:-0.2px;
+}
+
+/* Fields */
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:var(--gap);
+}
+.label-text{
+  font-size:13px;
+  color:var(--muted);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+  height:44px;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #e6e9ef;
+  font-size:15px;
+  outline:none;
+  transition:box-shadow .12s, border-color .12s;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+}
+input:focus{
+  border-color:var(--accent);
+  box-shadow:0 4px 18px rgba(99,102,241,0.12);
+}
+
+/* Button */
+.btn{
+  width:100%;
+  height:46px;
+  border:0;
+  background:var(--accent);
+  color:white;
+  border-radius:10px;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+  margin-top:4px;
+  transition:transform .08s ease, box-shadow .08s;
+  box-shadow:0 6px 18px rgba(79,70,229,0.18);
+}
+.btn:active{transform:translateY(1px)}
+.btn:focus{outline:2px solid rgba(79,70,229,0.14); outline-offset:2px}
+
+/* Small text */
+.small{
+  margin:12px 0 0 0;
+  color:var(--muted);
+  font-size:13px;
+  text-align:center;
+}
+.small a{color:var(--accent); text-decoration:none; font-weight:600}
+
+/* Responsive tweaks */
+@media (max-width:420px){
+  body{padding:18px}
+  .card{padding:20px}
+}
+
+  </style>
+</head>
+<body>
+  <main class="container">
+    <form class="card register-form" action="#" method="post" novalidate>
+      {% csrf_token %}
+      <h1 class="title">Welcome back</h1>
+
+      <label class="field">
+        <span class="label-text">username</span>
+        <input type="text" name="username" placeholder="@aaa" required />
+      </label>
+
+      <label class="field">
+        <span class="label-text">Password</span>
+        <input type="password" name="password" placeholder="Your password" required />
+      </label>
+
+      <button type="submit" class="btn">Sign in</button>
+
+      <p class="small">
+        Don’t have an account?
+        <a href="{% url 'register' %}">Create one</a>
+      </p>
+    </form>
+  </main>
+</body>
+</html>
