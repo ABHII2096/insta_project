@@ -54,7 +54,7 @@ html {
 
 .logo i {
   font-size: 36px;
-   color: #9b97d3;
+   color: #000000;
   transition: 0.3s ease;
   
 }
@@ -388,9 +388,11 @@ html {
   }
 
   .post-image img {
-    border-radius: 0;
-    width: 100vw;
-    max-width: 100vw;
+    width: 100%;
+    height: 350px;          /* FIXED HEIGHT for all images */
+    object-fit: cover;      /* CROP smartly & keep center */
+    border-radius: 50px;    /* optional */
+    background: #ddd;   
   }
 
   .post-header {
@@ -439,7 +441,7 @@ html {
 .three-dot-menu {
     position: absolute;
     right: 30px;   
-    top: 10px;    
+    top: 26px;    
     z-index: 50;
 }
 
